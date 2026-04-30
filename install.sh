@@ -17,3 +17,6 @@ curl -sS https://starship.rs/install.sh | sh
 
 # Install Homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Add brew packages
+brew install gh php@8.2 mysql redis
