@@ -20,3 +20,6 @@ curl -sS https://starship.rs/install.sh | sh
 
 # Add brew packages
 brew install gh php@8.2 mysql redis
+
+# Start brew services
+brew services start php@8.2 mysql redis
