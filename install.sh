@@ -40,4 +40,28 @@ brew services start php@8.2
 brew services start mysql
 brew services start redis
 
+# Install Composer
+echo "Installing Composer..."
+
+EXPECTED_SIGNATURE=$(curl -s https://composer.github.io/installer.sig)
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+
+ACTUAL_SIGNATURE=$(php -r "echo hash_file('sha384', 'composer-setup.php');")
+
+if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]; then
+    echo "ERROR: Invalid Composer installer signature"
+    rm -f composer-setup.php
+    exit 1
+fi
+
+php composer-setup.php --quiet
+
+echo "Making Composer global..."
+sudo mv composer.phar /usr/local/bin/composer
+sudo chmod +x /usr/local/bin/composer
+
+# Cleanup
+rm -f composer-setup.php
+
 echo "Setup complete."
